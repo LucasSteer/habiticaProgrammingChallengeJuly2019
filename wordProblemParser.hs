@@ -5,16 +5,21 @@ main = do
   let elements = parseProblem problem
   print (solveProblem elements)
 
+solveProblem [left, op, right] = performOp left op right
 solveProblem elements =
-  (let [left, op, right] = getElements elements in performOp left op right)
+  solveProblem (solveSubProblem elements)
 
-getElements parsedProblem =
-  if parsedProblem!!2 == "by"
-    then head parsedProblem : unwords (drop 1 (take 3 (take 4 parsedProblem))) : last parsedProblem : []
-    else take 3 parsedProblem
+solveSubProblem elements =
+  show (solveProblem (exceptLastTwo elements)) : (lastTwo elements)
+
+exceptLastTwo list =
+  take (length list - 2) list
+
+lastTwo list =
+  drop (length list - 2) list
 
 parseProblem problem =
-  splitOn " " (init (drop (length "What is ") problem))
+  filter (/= "by") (splitOn " " (init (drop (length "What is ") problem)))
 
 performOp left op right =
   (getOperator op) (parseFloat left) (parseFloat right)
@@ -25,5 +30,6 @@ parseFloat str =
 getOperator op
   | op == "plus" = (+)
   | op == "minus" = (-)
-  | op == "multiplied by" = (*)
-  | op == "divided by" = (/)
+  | op == "multiplied" = (*)
+  | op == "divided" = (/)
+  | otherwise = error "wordProblemParser error - unknown operand"

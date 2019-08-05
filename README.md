@@ -1,1 +1,1 @@
-My solution for the Habitica Programming challenge July 2019, found here: https://habitica.com/challenges/effd2f51-e4b1-4061-94bb-d91dc7a61f55
+My solution for the [Habitica Programming Guild's July 2019 challenge](https://habitica.com/challenges/effd2f51-e4b1-4061-94bb-d91dc7a61f55).
