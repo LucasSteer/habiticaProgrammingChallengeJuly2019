@@ -22,12 +22,12 @@ parseProblem problem =
   filter (/= "by") (splitOn " " (init (drop (length "What is ") problem)))
 
 performOp left op right =
-  (getOperator op) (parseFloat left) (parseFloat right)
+  (parseOperator op) (parseFloat left) (parseFloat right)
 
 parseFloat str =
   read str :: Float
 
-getOperator op
+parseOperator op
   | op == "plus" = (+)
   | op == "minus" = (-)
   | op == "multiplied" = (*)
